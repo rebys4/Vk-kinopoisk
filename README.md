@@ -1,69 +1,88 @@
-# React + TypeScript + Vite
+# Кинопоиск SPA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Простое SPA-приложение для просмотра информации о фильмах с использованием React, TypeScript и VKUI.
 
-Currently, two official plugins are available:
+## 📋 Структура проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+kino-spa/
+├── public/
+├── src/
+│   ├── api/              # API-клиент Kinopoisk.dev
+│   ├── components/       # Общие компоненты, если есть
+│   ├── pages/            # Страницы (MainPage, FilmPage, FavoritesPage)
+│   ├── store/            # MobX-сторы (filmStore, favoritesStore)
+│   ├── App.tsx           # Основной компонент с маршрутизацией
+│   └── main.tsx          # Точка входа
+├── .env                  # Переменные окружения
+├── .env.default          # Шаблон переменных окружения
+├── package.json
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Быстрый старт
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Клонировать репозиторий
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <URL_репозитория>
+cd kino-spa
 ```
+
+### 2. Установить зависимости
+
+```bash
+npm install
+```
+
+### 3. Настроить переменные окружения
+
+1. Скопируйте файл `.env.default` в `.env`:
+
+   ```bash
+   cp .env.default .env
+   ```
+2. В файле `.env` заполните:
+
+   ```dotenv
+   VITE_KINOPOISK_API_URL=https://api.kinopoisk.dev
+   VITE_KINOPOISK_API_KEY=ваш_API_ключ
+   ```
+
+> 🔑 **Важно**: ключ можно получить в личном кабинете на [kinopoisk.dev](https://kinopoisk.dev).
+
+### 4. Запустить в режиме разработки
+
+```bash
+npm run dev
+```
+
+Откройте в браузере [http://localhost:5173](http://localhost:5173).
+
+### 5. Собрать приложение для продакшена
+
+```bash
+npm run build
+```
+
+Сборка будет размещена в папке `dist/`.
+
+## 💡 Подробности
+
+* **Главная страница** (`/`): список фильмов с бесконечным скроллом и фильтрами по жанрам.
+* **Страница фильма** (`/movie/:id`): детальная информация о выбранном фильме.
+* **Избранное** (`/favorites`): фильмы, добавленные в список избранных (сохранение в `localStorage`).
+
+## 🛠️ Технологии
+
+* React 18+
+* TypeScript
+* VKUI (VKontakte UI)
+* MobX + MobX React Lite
+* Axios
+* Vite
+* React Router v6
+
+## 📄 Лицензия
+
+MIT © Ваше имя или организация
